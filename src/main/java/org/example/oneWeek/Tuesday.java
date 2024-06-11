@@ -1,17 +1,13 @@
-package org.example;
+package org.example.oneWeek;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
-
+public class Tuesday {
     public static void main(String[] args) throws IOException {
         StringBuilder sb = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -48,14 +44,4 @@ public class Main {
 
 
     }
-
-            }
-
-
-
-
-
-
-
-
-
+}
