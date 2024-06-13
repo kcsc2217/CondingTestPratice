@@ -1,4 +1,4 @@
-package org.example;
+package org.example.oneWeek;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,8 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-
-public class Main {
+public class Thursday {
 
     public static void main(String[] args) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -39,7 +38,7 @@ public class Main {
 
         while(min < max){
             int mid = (max + min) / 2;
-           long length = 0;
+            long length = 0;
             for(int i = 0; i < N; i++){
 
 
@@ -50,7 +49,7 @@ public class Main {
             }
 
 
-             if(length < M){
+            if(length < M){
                 max = mid;
             }
 
@@ -66,14 +65,4 @@ public class Main {
 
 
     }
-
-            }
-
-
-
-
-
-
-
-
-
+}
