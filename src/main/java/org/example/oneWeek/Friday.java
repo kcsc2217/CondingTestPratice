@@ -1,14 +1,12 @@
-package org.example;
+package org.example.oneWeek;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-    
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+
+public class Friday {
 
     public static void main(String[] args) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -40,7 +38,7 @@ public class Main {
 
             for(int i =0; i < K; i++){
 
-                    sum += arr[i] / mid;
+                sum += arr[i] / mid;
 
             }
 
@@ -58,14 +56,4 @@ public class Main {
         System.out.println(result);
 
     }
-
-            }
-
-
-
-
-
-
-
-
-
+}
