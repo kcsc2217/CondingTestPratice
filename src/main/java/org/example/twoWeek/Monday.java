@@ -1,17 +1,13 @@
-package org.example;
+package org.example.twoWeek;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
-    
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+
+public class Monday {
 
     static int map[][];
     static int N, M , V;
@@ -25,33 +21,33 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-         N = Integer.parseInt(st.nextToken()); // 정점의 개수
-         M = Integer.parseInt(st.nextToken()); // 간선의 개수
-         V = Integer.parseInt(st.nextToken()); // 시작 정점
+        N = Integer.parseInt(st.nextToken()); // 정점의 개수
+        M = Integer.parseInt(st.nextToken()); // 간선의 개수
+        V = Integer.parseInt(st.nextToken()); // 시작 정점
 
-         map = new int[N+1][N+1]; // 간선 배열 초기화 1부터 시작하므로 N+1 로 초기화
+        map = new int[N+1][N+1]; // 간선 배열 초기화 1부터 시작하므로 N+1 로 초기화
         visit = new boolean[N+1];
 
 
 
         // 인접 정점 (즉 정점이 간선으로 연결되어 있으면) 1로 초기화
-         for(int i = 0; i < M; i++){
-             st = new StringTokenizer(br.readLine(), " ");
+        for(int i = 0; i < M; i++){
+            st = new StringTokenizer(br.readLine(), " ");
 
-             int x = Integer.parseInt(st.nextToken());
-             int y = Integer.parseInt(st.nextToken());
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
 
-             map[x][y] = 1;
-             map[y][x] = 1;
-         }
+            map[x][y] = 1;
+            map[y][x] = 1;
+        }
 
-         dfs(V);
-         sb.append("\n");
+        dfs(V);
+        sb.append("\n");
 
         visit = new boolean[N+1];
 
 
-         bfs(V);
+        bfs(V);
 
 
 
@@ -77,7 +73,7 @@ public class Main {
     }
 
     static void bfs(int v){
-        Queue<Integer>que = new LinkedList<>();
+        Queue<Integer> que = new LinkedList<>();
         que.add(v);
 
         visit[v] = true;
@@ -95,16 +91,4 @@ public class Main {
         }
 
     }
-
-
-
-            }
-
-
-
-
-
-
-
-
-
+}
