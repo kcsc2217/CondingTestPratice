@@ -1,14 +1,13 @@
-package org.example;
+package org.example.twoWeek;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
-
+public class Tuesday {
     static int dx[] = {-1, 1 ,0, 0}; // 상 하 좌우 로 이동할 x좌표
     static int dy[] = {0, 0 ,-1, 1}; // 상 하 좌우 로 이동할 y좌표
     static int N;
@@ -71,32 +70,18 @@ public class Main {
         count++;
 
         for(int j = 0; j < 4; j++){
-           int now_x =  x + dx[j]; //상하좌우
-           int now_y = y+ dy[j];  // 상하좌우
+            int now_x =  x + dx[j]; //상하좌우
+            int now_y = y+ dy[j];  // 상하좌우
 
-           if(now_x >=0 && now_x <N && now_y >= 0 &&now_y < N){ // 배열의 경계선 체크
+            if(now_x >=0 && now_x <N && now_y >= 0 &&now_y < N){ // 배열의 경계선 체크
 
-               if(!visit[now_x][now_y] && map[now_x][now_y] == 1){ // 배열 경계선 체크해줌
-                   dfs(now_x, now_y);
-               }
-
-           }
-
-
-        }
-    }
-
-
-
-
+                if(!visit[now_x][now_y] && map[now_x][now_y] == 1){ // 배열 경계선 체크해줌
+                    dfs(now_x, now_y);
+                }
 
             }
 
 
-
-
-
-
-
-
-
+        }
+    }
+}
