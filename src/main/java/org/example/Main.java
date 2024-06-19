@@ -11,12 +11,12 @@ public class Main {
 
     static int dx[] = {-1, 1 ,0, 0}; // 상 하 좌우 로 이동할 x좌표
     static int dy[] = {0, 0 ,-1, 1}; // 상 하 좌우 로 이동할 y좌표
-    static int N;
+    static int N; //가로의 길이
+    static int M; // 세로의 길이
+
+    static int K; // 배추가 심어져 있는 위치 갯수
+
     static int map[][];
-
-    static int count = 0;
-
-    static List<Integer> list = new ArrayList<>();
 
     static boolean visit[][];
     static StringBuilder sb;
@@ -25,68 +25,100 @@ public class Main {
         sb = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+        int testCase = Integer.parseInt(br.readLine());
 
+        for(int i = 0; i < testCase; i++){
+            StringTokenizer st = new StringTokenizer(br.readLine()," ");
 
-        N = Integer.parseInt(br.readLine());
+            int count = 0;
 
-        map = new int[N][N];
-        visit = new boolean[N][N];
+            N = Integer.parseInt(st.nextToken()); //가로 길이
+            M = Integer.parseInt(st.nextToken()); // 세로 길이
+            K = Integer.parseInt(st.nextToken()); // 배추 심어져 있는 위치 갯수
 
-        for(int i =0; i < N; i++){
-            String str = br.readLine();
+            map = new int[N][M]; // 배추가 들어갈 배열 초기화
+            visit = new boolean[N][M]; // 방문 배추를 체크하기 위한 배열 초기화
+
+            for(int j =0; j < K; j++ ){
+                st = new StringTokenizer(br.readLine()," ");
+                int x = Integer.parseInt(st.nextToken());
+                int y = Integer.parseInt(st.nextToken());
+
+                map[x][y] = 1;
+            }
 
             for(int j = 0; j < N; j++){
-                map[i][j] = str.charAt(j) - '0';
+                for(int k = 0; k < M; k++){
+                    if(!visit[j][k] && map[j][k] == 1){
+                        count++;
+                        dfs(j,k);
+                    }
+                }
             }
-        } // 배열 초기화
+
+            sb.append(count).append("\n");
 
 
 
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                if(!visit[i][j] && map[i][j] == 1) {
-                    dfs(i, j);
-                    list.add(count);
-                    count = 0;}
-            }
+
         }
-
-        sb.append(list.size()).append("\n");
-        Collections.sort(list);
-
-        for(Integer i : list){
-            sb.append(i).append("\n");
-        }
-
 
         System.out.println(sb);
-
-
 
 
     }
 
     private static void dfs(int x, int y){
         visit[x][y] = true;
-        count++;
 
-        for(int j = 0; j < 4; j++){
-           int now_x =  x + dx[j]; //상하좌우
-           int now_y = y+ dy[j];  // 상하좌우
-
-           if(now_x >=0 && now_x <N && now_y >= 0 &&now_y < N){ // 배열의 경계선 체크
-
-               if(!visit[now_x][now_y] && map[now_x][now_y] == 1){ // 배열 경계선 체크해줌
-                   dfs(now_x, now_y);
-               }
-
-           }
+        for(int i = 0; i < 4; i++){
+            int now_x = x + dx[i];
+            int now_y = y + dy[i];
 
 
+            if(now_x >=0 && now_x < N && now_y >=0 && now_y < M ){
+                if(map[now_x][now_y] == 1 && !visit[now_x][now_y]){
+                    dfs(now_x, now_y);
+                }
+            }
         }
+
     }
 
+    private static void bfs(int x, int y){
+        Queue<Integer> xQue = new LinkedList<>();
+        Queue<Integer> yQue = new LinkedList<>();
 
+
+        visit[x][y] =true;
+
+        xQue.add(x);
+        yQue.add(y);
+
+        while(!xQue.isEmpty() && yQue.isEmpty()){
+            int now_x = xQue.poll();
+            int now_y = yQue.poll();
+
+            for(int i = 0; i < 4; i++){
+                int next_x = now_x + dx[i];
+                int next_y = now_y + dy[i];
+
+                if(next_x >=0 && next_x < N && next_y >=0 && next_y < M ){
+                    if(map[next_x][next_y] == 1 && !visit[next_x][next_y]){
+                       xQue.add(next_x);
+                       yQue.add(next_y);
+
+                       visit[next_x][next_y] = true;
+                    }
+                }
+
+
+            }
+         }
+
+
+
+    }
 
 
 
