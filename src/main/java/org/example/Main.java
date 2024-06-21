@@ -9,12 +9,9 @@ import java.util.*;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
 
-    static int N; //정점의 갯수
-    static int M; // 간선의 갯수
-    static int map[][];
-
-    static int count = 0;
-    static boolean visit[];
+    static int N; // 수빈이의 위치
+    static int K; // 동생의 위치
+    static int visit[];
     static StringBuilder sb;
 
     public static void main(String[] args) throws IOException {
@@ -23,31 +20,14 @@ public class Main {
 
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken()); // 수빈이의 위치 초기화
+        K = Integer.parseInt(st.nextToken()); //  동생의 위치 쵝화
 
-        map = new int[N+1][N+1];
-        visit = new boolean[N+1];
+        visit = new int[100001]; // 위치의 범위가 0 ~ 100,000 까지니깐 배열을 100001개로 초괴화
 
+        int result = bfs(N);
 
-        for(int i = 0; i < M; i++){
-            st = new StringTokenizer(br.readLine(), " ");
-
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-
-            map[x][y] = 1;
-            map[y][x] = 1;
-
-        }
-
-        for(int i = 1; i < N+1; i++){
-            if(!visit[i]){
-                dfs(i);
-                count++;
-            }
-        }
-        sb.append(count);
+        sb.append(result);
 
 
         System.out.println(sb);
@@ -55,18 +35,36 @@ public class Main {
 
     }
 
-    private static void dfs(int v){
-        visit[v] = true;
+    private static int bfs(int node){
+        Queue<Integer> que = new LinkedList<>();
 
-        for(int i = 1; i < N+1; i++){
-            if(!visit[i] && map[v][i] == 1){
-                dfs(i);
+        que.add(node); //처음 수빈이의 위치 값 넣어줌
+        int index = node; //수빈이의 위치
+
+        int n = 0;
+
+        visit[index] = 1; // 편의상 1초부터 시작으로 바꿈 수빈이의 처음 위치에 1초
+
+        while(!que.isEmpty()){
+            n = que.poll(); // 수빈이의 위치 기준값
+            if(n == K){ // 수빈이의 위치가 동생의 위치랑 같을때 1초부터 시작헀으므로 -1을 해줌 원래는 0초부터 시작
+                return visit[n] -1;
+            }
+            if(n-1 >=0 && visit[n-1] == 0){ // 위치의 이전값 단 배열의 범위를 벗어나지 않게 0보다는 커야하고 방문하지 않는 곳이여야함
+                visit[n-1] = visit[n] + 1;
+                que.add(n-1);
+            }
+            if(n+1 <= 100000 && visit[n+1] == 0){ // 위치의 다음 값 배열의 범위를 벗어나지 않고 100000보다는 작은 값, 방문 하지 않은값
+                visit[n+1] = visit[n] +1;
+                que.add(n+1);
+            }
+            if(2 * n <=100000 && visit[2*n] == 0){ // 위치의 두배의 값 배열의 범위를 벗어나지 않고 100000보다는 작은 값, 방문 하지 않은값
+                visit[2*n] = visit[n] +1;
+                que.add(2*n);
             }
         }
 
-
-
-
+        return -1;
     }
 
 }
