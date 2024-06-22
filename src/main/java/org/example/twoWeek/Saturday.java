@@ -1,13 +1,13 @@
-package org.example;
+package org.example.twoWeek;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+public class Saturday {
 
     static int N; // 가로 크기
     static int M; // 세로 크기
@@ -69,26 +69,18 @@ public class Main {
                 int next_y = now_y  +dy[i];
 
                 if(next_x >=1 && next_x <=N && next_y >=1 && next_y <=M){ // 이동할 수 있는 범위 탐색
-                        if(!visit[next_x][next_y] && map[next_x][next_y] == 1){ // 방문 가능하면
-                            queue.add(new int[] {next_x, next_y});
-                            visit[next_x][next_y] = true;
-                            map[next_x][next_y] = map[now_x][now_y] +1; //최소칸 이동
+                    if(!visit[next_x][next_y] && map[next_x][next_y] == 1){ // 방문 가능하면
+                        queue.add(new int[] {next_x, next_y});
+                        visit[next_x][next_y] = true;
+                        map[next_x][next_y] = map[now_x][now_y] +1; //최소칸 이동
+                    }
                 }
             }
+
         }
 
+
+
+
     }
-
-
-
-
-}}
-
-
-
-
-
-
-
-
-
+}
