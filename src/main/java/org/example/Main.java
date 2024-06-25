@@ -15,29 +15,42 @@ public class Main {
 
          int N = Integer.parseInt(br.readLine());
 
-         List<Integer> list = new ArrayList<>();
-
-
-         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+         int arr[][] = new int[N][2];
 
          for(int i = 0; i < N; i++){
-             list.add(Integer.parseInt(st.nextToken()));
-         } // 정렬
+             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-         Collections.sort(list);
-
-         int sum = 0;
-
-         int result = 0;
-
-
-         for(int i = 0; i < list.size();i++){
-             sum+= list.get(i);
-
-             result += sum;
+             arr[i][0] = Integer.parseInt(st.nextToken());
+             arr[i][1] = Integer.parseInt(st.nextToken());
          }
 
-         sb.append(result);
+         int max = Integer.MIN_VALUE;
+
+         Arrays.sort(arr, new Comparator<int[]>() {
+             @Override
+             public int compare(int[] o1, int[] o2) { // 종료점을 기준으로 정렬
+
+                 if(o1[1] == o2[1]){
+                     return o1[0] - o2[0];
+                 }else{
+                     return o1[1] - o2[1];
+                 }
+             }
+         }); // 정열
+
+        int count = 0;
+        int pre_end = 0;
+
+
+
+        for(int i = 0; i < N; i ++){
+            if(pre_end <= arr[i][0]){
+                pre_end = arr[i][1];
+                count ++;
+            }
+        }
+
+         sb.append(count);
 
 
         System.out.println(sb);
