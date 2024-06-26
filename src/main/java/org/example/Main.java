@@ -13,44 +13,31 @@ public class Main {
          StringBuilder sb = new StringBuilder();
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-         int N = Integer.parseInt(br.readLine());
+         int n = Integer.parseInt(br.readLine());
 
-         int arr[][] = new int[N][2];
+         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-         for(int i = 0; i < N; i++){
-             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+         List<Integer> list = new ArrayList<>();
 
-             arr[i][0] = Integer.parseInt(st.nextToken());
-             arr[i][1] = Integer.parseInt(st.nextToken());
+         for(int i = 0; i < n; i++){
+             list.add(Integer.parseInt(st.nextToken()));
          }
 
-         int max = Integer.MIN_VALUE;
+         Collections.sort(list,Collections.reverseOrder()); // 그리디 알고리즘을 사용하기  위하여
 
-         Arrays.sort(arr, new Comparator<int[]>() {
-             @Override
-             public int compare(int[] o1, int[] o2) { // 종료점을 기준으로 정렬
 
-                 if(o1[1] == o2[1]){
-                     return o1[0] - o2[0];
-                 }else{
-                     return o1[1] - o2[1];
-                 }
+         int sum = 0;
+         int pre_level = list.get(0); //  가장 레벨이 높은 값을 맨 앞 값으로 둠
+
+         for(int i = 1; i < n; i++){
+             sum += pre_level + list.get(i);  // 레벨끼리 합하여 총합에 담아둠
+             if(pre_level <= list.get(i)){ // 전의 레벨과 합해야할 레벨을 비교하여 더 큰 값이 기준 레벨로 잡는다.
+                 pre_level = list.get(i);
              }
-         }); // 정열
+         }
 
-        int count = 0;
-        int pre_end = 0;
+         sb.append(sum);
 
-
-
-        for(int i = 0; i < N; i ++){
-            if(pre_end <= arr[i][0]){
-                pre_end = arr[i][1];
-                count ++;
-            }
-        }
-
-         sb.append(count);
 
 
         System.out.println(sb);
