@@ -13,30 +13,37 @@ public class Main {
          StringBuilder sb = new StringBuilder();
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-         int n = Integer.parseInt(br.readLine());
+         StringTokenizer st = new StringTokenizer(br.readLine()," ");
 
-         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+         int N = Integer.parseInt(st.nextToken());
+         int K = Integer.parseInt(st.nextToken());
 
          List<Integer> list = new ArrayList<>();
 
-         for(int i = 0; i < n; i++){
-             list.add(Integer.parseInt(st.nextToken()));
+         for(int i = 0; i < N; i++){
+             list.add(Integer.parseInt(br.readLine())); // 요금 초기화
          }
 
-         Collections.sort(list,Collections.reverseOrder()); // 그리디 알고리즘을 사용하기  위하여
+
+         Collections.sort(list,Collections.reverseOrder());
+
+         int result = 0;
 
 
-         int sum = 0;
-         int pre_level = list.get(0); //  가장 레벨이 높은 값을 맨 앞 값으로 둠
+         for(int i = 0; i < N; i++){
+             int aw = list.get(i);
+             if(aw <= K){
+                   result += K / aw;
 
-         for(int i = 1; i < n; i++){
-             sum += pre_level + list.get(i);  // 레벨끼리 합하여 총합에 담아둠
-             if(pre_level <= list.get(i)){ // 전의 레벨과 합해야할 레벨을 비교하여 더 큰 값이 기준 레벨로 잡는다.
-                 pre_level = list.get(i);
+                   K %= aw;
              }
+
+
          }
 
-         sb.append(sum);
+         sb.append(result);
+
+
 
 
 
