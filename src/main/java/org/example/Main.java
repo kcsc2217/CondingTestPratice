@@ -8,54 +8,31 @@ import java.util.*;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
-    static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws IOException {
 
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+         StringTokenizer st = new StringTokenizer(br.readLine()," ");
 
-         String N = br.readLine();
+         int N = Integer.parseInt(st.nextToken()); //남학생 수
+         int M = Integer.parseInt(st.nextToken()); // 여학생 수
+         int K = Integer.parseInt(st.nextToken()); // 인턴쉽 인원
 
-         validation(N);
-
-        System.out.println(sb.toString());
+         int count = 0;
 
 
+         while(N >= 2 && M >=1 && (N+M)- K >= 3){
+             count++;
+             N -=2;
+             M--;
+         }
+
+        System.out.println(count);
 
 
 
     }
 
-    public static void validation(String result){
-
-        if(!result.contains("0")){ // 30의 배수 이므로 끝에가 0이여야 한다 0이 포함되어 있지 않으므로 -1
-            System.out.println(-1);
-            return;
-        }else{
-            List<Integer> list  = new ArrayList<>();
-
-            int sum  =0;
-            for(int i = 0; i < result.length(); i++){  // 주어진 숫자의 각 자리 수를 다 더해준다.
-             int aw =  result.charAt(i) - '0';
-                list.add(aw);
-                 sum += aw;
-            }
-
-            if(sum  % 3 != 0){ // 각자리수의 합이 3의 배수가 아니면 -1
-                System.out.println(-1);
-                return;
-            }
-
-
-            Collections.sort(list,Collections.reverseOrder()); //그리디 알고리즘 ( 즉 30의 배수중 가장 큰 수를 만들어야해서
-
-            for(int i : list){
-                sb.append(i);
-            }
-
-
-        }
-    }
 
 
 
