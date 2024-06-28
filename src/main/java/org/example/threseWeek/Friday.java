@@ -1,22 +1,23 @@
-package org.example;
+package org.example.threseWeek;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+public class Friday {
+
     static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws IOException {
 
-         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 
-         String N = br.readLine();
+        String N = br.readLine();
 
-         validation(N);
+        validation(N);
 
         System.out.println(sb.toString());
 
@@ -36,9 +37,9 @@ public class Main {
 
             int sum  =0;
             for(int i = 0; i < result.length(); i++){  // 주어진 숫자의 각 자리 수를 다 더해준다.
-             int aw =  result.charAt(i) - '0';
+                int aw =  result.charAt(i) - '0';
                 list.add(aw);
-                 sum += aw;
+                sum += aw;
             }
 
             if(sum  % 3 != 0){ // 각자리수의 합이 3의 배수가 아니면 -1
@@ -57,15 +58,4 @@ public class Main {
         }
     }
 
-
-
 }
-
-
-
-
-
-
-
-
-
