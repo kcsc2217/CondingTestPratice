@@ -11,65 +11,55 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+         StringBuilder sb = new StringBuilder();
 
-         StringTokenizer st = new StringTokenizer(br.readLine()," ");
+         int N = Integer.parseInt(br.readLine());
 
-         int N = Integer.parseInt(st.nextToken());
-         int S = Integer.parseInt(st.nextToken());
-         int M = Integer.parseInt(st.nextToken());
-
-
-         st = new StringTokenizer(br.readLine(), " ");
-
-        boolean dp[][] = new boolean[N+1][M+1];
-
-         int arr[] = new int[N+1];
-
-         for(int i = 1; i <= N; i++){
-             arr[i] = Integer.parseInt(st.nextToken());
-         }
-
-         dp[0][S] = true;
+         int list[][] = new int[N][N];
+         long dp[][] = new long[N][N];
 
 
-         for(int i = 1; i <= N; i++){
-            int v = arr[i];
-
-             for(int j = 0; j <= M; j++){
-                 if(dp[i-1][j]){
-                     int up= j + v ;
-                     int down = j - v;
 
 
-                    if(up <= M ){
-                        dp[i][up] = true;
-                    }
-
-                     if(0 <= down){
-                         dp[i][down] = true;
-                     }
-                 }
+         for(int i = 0; i < N; i++){
+             StringTokenizer st = new StringTokenizer(br.readLine()," ");
+             for(int j = 0; j < N; j++){
+                 list[i][j] = Integer.parseInt(st.nextToken());
              }
-
-
          }
 
-         int max = -1;
 
-        for(int i = M; i >=0 ; i--){
-            if(dp[N][i]){
-                max = i;
-                break;
-            }
-        }
+         dp[0][0] = 1;
 
-        System.out.println(max);
+
+         for(int i = 0; i < N; i++){
+             for(int j = 0; j < N; j++){
+
+                 if(dp[i][j] == 0 || (i == N-1 && j == N-1) ) continue;
+
+                     int jump = list[i][j];
+
+                     if(j + jump < N){
+                         dp[i][j + jump] += dp[i][j];
+                     }
+
+                     if(i + jump < N){
+                         dp[i+jump][j] += dp[i][j];
+                     }
+
+
+
+             }
+         }
+
+
+        System.out.println(dp[N-1][N-1]);
+
+
 
 
 
     }
-
-
 
 
 }
