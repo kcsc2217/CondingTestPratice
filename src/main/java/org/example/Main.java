@@ -15,62 +15,42 @@ public class Main {
 
          int N = Integer.parseInt(br.readLine());
 
-         int max = 987654321;
+         int arr[][] = new int[N+2][2]; // N일때 T가 1이면 일을 할 수 있는 상황이므로 그리고 1일 부터 신청하므로
 
-         String str = br.readLine();
+         int dp[] = new int[N+2];
 
-         int dp[] = new int[N];
+         for(int i = 1; i <= N; i++){
+             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-         char[] arr = new char[N];
-
-         for(int i = 0; i < N; i++){
-             arr[i] = str.charAt(i);
+             arr[i][0] = Integer.parseInt(st.nextToken()); // 상담을 하는데 걸리는 시간
+             arr[i][1] = Integer.parseInt(st.nextToken());  // 상담 비용
          }
 
 
-         Arrays.fill(dp, max);
-        dp[0] = 0;
+         int max = -1;
 
-         for(int i = 0; i < N-1; i++){
-             int now = i;
-             char now_ch = arr[now];
-             for(int j = i+1; j < N; j++){
-                 int next = j;
-                 char next_ch = arr[next];
 
-                 if(now_ch == 'B' && next_ch == 'O'){  // 글자가 B이면서 다음 글자가 점플 할 수 있으면
-                     dp[next] = Math.min(dp[next], dp[now] + (next-now) * (next-now));
-
-                 }
-
-                 if(now_ch == 'O' && next_ch == 'J'){  // 글자가 O이면서 다음 글자가 점플 할 수 있으면
-                     dp[next] = Math.min(dp[next], dp[now] + (next-now) * (next-now));
-
-                 }
-
-                 if(now_ch == 'J' && next_ch == 'B'){  // 글자가 B이면서 다음 글자가 점플 할 수 있으면
-                     dp[next] = Math.min(dp[next], dp[now] + (next-now) * (next-now));
-
-                 }
+         for(int i = 1; i < N+2; i++){
+             if(max < dp[i]){
+                 max = dp[i]; // 누적의 합을 더할 예정
              }
 
+             int time = i + arr[i][0];
+
+             if(time < N +2){
+                 dp[time] = Math.max(dp[time], max + arr[i][1]); // 해당 누적의 합과 상담 비용을 더함
+             }
+         }
+        System.out.println(dp[N+1]);
+
+
 
          }
-
-
-
-        if(dp[N-1] == max){
-            System.out.println(-1);
-        }else{
-            System.out.println(dp[N-1]);
-        }
-
-
 
     }
 
 
-}
+
 
 
 
