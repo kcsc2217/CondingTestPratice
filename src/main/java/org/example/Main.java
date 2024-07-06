@@ -3,7 +3,7 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -13,37 +13,33 @@ public class Main {
          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
          StringBuilder sb = new StringBuilder();
 
-         int N = Integer.parseInt(br.readLine());
+         int number[] = {1,2,3};
 
-         int arr[][] = new int[N+2][2]; // N일때 T가 1이면 일을 할 수 있는 상황이므로 그리고 1일 부터 신청하므로
 
-         int dp[] = new int[N+2];
+         int testCase = Integer.parseInt(br.readLine());
 
-         for(int i = 1; i <= N; i++){
-             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            int dp[][] = new int[100001][4];
+            dp[1][1] = 1; //1
+            dp[2][1] = 1; // 1+1
+            dp[2][2] = 1; // 2
+            dp[3][1] = 1; //1+1+1
+            dp[3][2] = 1; //1+2
+            dp[3][3] = 1; // 3;
 
-             arr[i][0] = Integer.parseInt(st.nextToken()); // 상담을 하는데 걸리는 시간
-             arr[i][1] = Integer.parseInt(st.nextToken());  // 상담 비용
+        for(int i =4 ; i <=10000; i++){
+            dp[i][1] = dp[i-1][1];
+            dp[i][2] = dp[i-2][1] + dp[i-2][2];
+            dp[i][3] = dp[i-3][1] + dp[i-3][2] + dp[i-3][3];
+        }
+
+         for(int t = 0;  t < testCase; t++){
+             int N = Integer.parseInt(br.readLine());
+              int sum = dp[N][1] + dp[N][2] + dp[N][3];
+             sb.append(sum).append("\n");
+
          }
 
-
-         int max = -1;
-
-
-         for(int i = 1; i < N+2; i++){
-             if(max < dp[i]){
-                 max = dp[i]; // 누적의 합을 더할 예정
-             }
-
-             int time = i + arr[i][0];
-
-             if(time < N +2){
-                 dp[time] = Math.max(dp[time], max + arr[i][1]); // 해당 누적의 합과 상담 비용을 더함
-             }
-         }
-        System.out.println(dp[N+1]);
-
-
+        System.out.println(sb);
 
          }
 
