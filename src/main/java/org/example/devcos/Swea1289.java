@@ -1,14 +1,12 @@
-package org.example;
-
+package org.example.devcos;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-
-class Solution {
-
+public class Swea1289 {
+    // 원재의 메모리 복구하기
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
@@ -20,13 +18,13 @@ class Solution {
         for(int t = 1; t <=testCase; t++){
             String str = br.readLine();  // 숫자 입력받기
 
-            int size = str.length();
+             int size = str.length();
 
-            int count = 0;
+             int count = 0;
 
 
-            int result[] = new int[size];
-            int arr[] = new int[size];
+             int result[] = new int[size];
+             int arr[] = new int[size];
 
             Arrays.fill(arr, 0); // 해당 배열 0으로 채우기
 
