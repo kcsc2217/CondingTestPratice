@@ -5,51 +5,72 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-
+import java.util.Comparator;
+import java.util.StringTokenizer;
 
 class Solution {
 
+    static int[] point, kcal;
+    static int N, L, max;
+
     public static void main(String[] args) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
+
 
 
         int testCase = Integer.parseInt(br.readLine());
 
 
-        for(int t = 1; t <=testCase; t++){
-            String str = br.readLine();  // 숫자 입력받기
+        for(int t = 0; t < testCase; t++){
 
-            int size = str.length();
+            StringTokenizer st = new StringTokenizer(br.readLine());
 
-            int count = 0;
+            N = Integer.parseInt(st.nextToken());
+            L = Integer.parseInt(st.nextToken());
+            max = Integer.MIN_VALUE;
 
 
-            int result[] = new int[size];
-            int arr[] = new int[size];
+             point = new int[N];
+             kcal = new int[N];
 
-            Arrays.fill(arr, 0); // 해당 배열 0으로 채우기
 
-            for(int i = 0; i < size; i++){
-                result[i] = str.charAt(i) - '0'; // 배열 숫자로 채우기
+            for(int i = 0; i < N; i++){
+                st = new StringTokenizer(br.readLine());
+
+                point[i] = Integer.parseInt(st.nextToken());
+                kcal[i] = Integer.parseInt(st.nextToken());
+
             }
 
-            for(int i = 0; i < size; i++){
-                if(arr[i] != result[i]){
-                    for(int j = i; j < size; j++){
-                        arr[j] = result[i];
-
-                    }
-                    count++;
-                }
-            }
-
-            sb.append("#").append(t).append(" ").append(count).append("\n");
+            dfs(0, 0, 0);
 
 
+            System.out.printf("#%d %d\n", t+1, max);
         }
 
-        System.out.println(sb);
+
+
+
+    }
+
+
+
+    private static void dfs(int cnt, int j, int k){
+        if(k > L) return;
+
+        if (cnt == N) {
+            if (j > max) {
+                max = j; // 현재 점수누적합이 max보다 크면 max변경(조건3)
+            }
+            return;
+        }
+
+
+            dfs(cnt+1, j + point[cnt], k+ kcal[cnt]);
+        dfs(cnt+1, j , k);
+
 
     }
 
