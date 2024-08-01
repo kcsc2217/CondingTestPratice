@@ -4,74 +4,42 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.util.*;
 
 class Solution {
-
-    static int[] point, kcal;
-    static int N, L, max;
-
-    public static void main(String[] args) throws IOException {
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+    public int[] solution(int[] prices) {
+        int n = prices.length;
+        int[] answer = new int[n];
 
 
+        Queue<Integer> que = new LinkedList<>(); //
 
-        int testCase = Integer.parseInt(br.readLine());
-
-
-        for(int t = 0; t < testCase; t++){
-
-            StringTokenizer st = new StringTokenizer(br.readLine());
-
-            N = Integer.parseInt(st.nextToken());
-            L = Integer.parseInt(st.nextToken());
-            max = Integer.MIN_VALUE;
-
-
-             point = new int[N];
-             kcal = new int[N];
-
-
-            for(int i = 0; i < N; i++){
-                st = new StringTokenizer(br.readLine());
-
-                point[i] = Integer.parseInt(st.nextToken());
-                kcal[i] = Integer.parseInt(st.nextToken());
-
-            }
-
-            dfs(0, 0, 0);
-
-
-            System.out.printf("#%d %d\n", t+1, max);
+        for(int i : prices){
+            que.add(i);
         }
 
 
+        int index = 0;
 
+        while(!que.isEmpty()){
+            int aw = que.poll();
 
-    }
+            for(int i = n - que.size(); i < n; i++){
 
+                if(prices[i] < aw){ //주식 가격이 떨어짐
+                    answer[index]++;
+                    break;
+                }
 
+                if(aw <= prices[i]){
+                    answer[index]++;
+                }
 
-    private static void dfs(int cnt, int j, int k){
-        if(k > L) return;
-
-        if (cnt == N) {
-            if (j > max) {
-                max = j; // 현재 점수누적합이 max보다 크면 max변경(조건3)
             }
-            return;
+            index ++;
+
         }
 
-
-            dfs(cnt+1, j + point[cnt], k+ kcal[cnt]);
-        dfs(cnt+1, j , k);
-
-
+        return answer;
     }
-
 }
